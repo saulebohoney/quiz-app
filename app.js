@@ -33,22 +33,30 @@ const questions=[
 
 //appState
 const appState ={
-    id: 0,
+    currentId: 0,
+    currentQuestion: {},
+    currentScore: 0
+
+    /*
     question:questions.question,
     answers:questions.answers,
     correctAnswer:questions.correctAnswer,
     userAnswer:questions.answers,
     score:0
+    */
 };
 
 //mod functions
-function addQuestion(appState, index){
-    appState.id++;
-    appState.questions.push([0]);
+function addQuestion(state, index){
+    appState.currentId++;
+    appState.currentQuestion = questions[appState.currentId-1]
+    //questions[2]
+    //questions[x-1]
+    //questions[state.currentId-1]
 
-    console.log(state);
+    console.log(appState.currentId);
 }
-addQuestion();
+console.log(appState.currentId);
 
 //render functions
 
