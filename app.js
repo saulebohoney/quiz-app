@@ -63,7 +63,7 @@ addQuestion();
 console.log(appState.currentId);
 
 //mod to check answers
-function checkAnswer(appState, userChoice) {
+function checkAnswer(state, userChoice) {
     appState.userAnswer = userChoice;
     if (userChoice == appState.currentQuestion.correctAnswer) {
       alert('correct!');
@@ -79,16 +79,17 @@ console.log(appState.currentScore);
 
 console.log(questions.length);
 //Question Template 
-const questionTemplate = function(appState){
+const questionTemplate = function(state){
+    console.log(state.currentQuestion.answers[0]);
     return 
     `<div>
-        <h1>Question ${appState.currentId}</h1>
-        <p>${appState.currentQuestion.question}</p>
+        <h1>Question ${state.currentId}</h1>
+        <p>${state.currentQuestion.question}</p>
 
         <form action="">    
-            <input type="radio" name="answer" value="a">${appState.currentQuestion.answers[0]}<br>
-            <input type="radio" name="answer" value="b">${appState.currentQuestion.answers[1]}<br>
-            <input type="radio" name="answer" value="c">${appState.currentQuestion.answers[2]}
+            <input type="radio" name="answer" value="a">${state.currentQuestion.answers[0]}<br>
+            <input type="radio" name="answer" value="b">${state.currentQuestion.answers[1]}<br>
+            <input type="radio" name="answer" value="c">${state.currentQuestion.answers[2]}
         </form>
     </div>
 
@@ -98,12 +99,12 @@ const questionTemplate = function(appState){
             <button>Submit</button>
         </form>
 
-    <div>Current Question ${appState.currentId} out of ${questions.length}</div>
-    <div>Current Score: ${appState.currentScore} out of ${questions.length}</div>
+    <div>Current Question ${state.currentId} out of ${questions.length}</div>
+    <div>Current Score: ${state.currentScore} out of ${questions.length}</div>
 
     </div>`;
 }
-questionTemplate(0);
+questionTemplate(appState);
 //console.log(questionTemplate);
 
 
