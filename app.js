@@ -79,10 +79,10 @@ console.log(appState.currentScore);
 
 console.log(questions.length);
 //Question Template 
-const questionTemplate = function(state){
-    console.log(state.currentQuestion.answers[0]);
-    return 
-    `<div>
+
+const renderList = function(state, element) {
+
+element.html(`<div>
         <h1>Question ${state.currentId}</h1>
         <p>${state.currentQuestion.question}</p>
 
@@ -102,13 +102,10 @@ const questionTemplate = function(state){
     <div>Current Question ${state.currentId} out of ${questions.length}</div>
     <div>Current Score: ${state.currentScore} out of ${questions.length}</div>
 
-    </div>`;
-}
-questionTemplate(appState);
-//console.log(questionTemplate);
-
-
-//render functions
-
+    </div>`);
+};
 
 //event listeners
+//start button
+//submit
+//start over
