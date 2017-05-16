@@ -59,27 +59,30 @@ function addQuestion(state){
 
     //console.log(appState.currentId);
 }
-addQuestion(appState);
-console.log(addQuestion);
 
 //mod to check answers
 function checkAnswer(state, userChoice) {
-    appState.userAnswer = userChoice;
-    if (userChoice == appState.currentQuestion.correctAnswer) {
+    state.userAnswer = userChoice;
+    if (userChoice == state.currentQuestion.correctAnswer) {
       alert('correct!');
-      appState.currentScore++;
-    } else {alert(`Sorry! The correct answer is ${appState.currentQuestion.correctAnswer}`)}
-    console.log(userChoice);
-    console.log(appState.currentQuestion.correctAnswer);
-    console.log(appState.currentScore);
+      state.currentScore++;
+    } else {alert(`Sorry! The correct answer is ${state.currentQuestion.correctAnswer}`)}
 }
 
-function startOver()
-    if(currentId > questions.length){
-        const originalState=
-       $(".quiz-entry").replaceWith(originalState);
-    }
-}
+
+
+// function finishPage(){
+//     if((currentId+1) > questions.length){
+//         renderFinish(appState, $('.quiz-entry'));
+// } else {
+//         renderList(appState, $('.quiz-entry'));
+// }
+
+
+//         const originalState=$(".quiz-entry").clone();
+//        $(".quiz-entry").replaceWith(originalState);
+//     }
+// }
 //var originalState = $("#some_div").clone();
 //$("#some_div").replaceWith(originalState);
 //Question Template 
@@ -90,12 +93,11 @@ element.html(`<div class='two'>
         <h1>Question ${state.currentId+1}</h1>
         <p>${state.currentQuestion.question}</p>
 
-        <form action="">    
-            <input type="radio" name="answer" value="a">${state.currentQuestion.answers[0]}<br>
-            <input type="radio" name="answer" value="b">${state.currentQuestion.answers[1]}<br>
-            <input type="radio" name="answer" value="c">${state.currentQuestion.answers[2]}
-        </form>
-             <button class='answer'>Submit</button>
+         
+            <input type="radio" name="answer" value="${state.currentQuestion.answers[0]}">${state.currentQuestion.answers[0]}<br>
+            <input type="radio" name="answer" value="${state.currentQuestion.answers[1]}">${state.currentQuestion.answers[1]}<br>
+            <input type="radio" name="answer" value="${state.currentQuestion.answers[2]}">${state.currentQuestion.answers[2]}
+            <button class='answer'>Submit</button>
 
     </div>
 
@@ -103,6 +105,28 @@ element.html(`<div class='two'>
     <div>Current Score: ${state.currentScore} out of ${questions.length}</div>
 
     `);
+};
+
+const renderHome = function(state, element) {
+
+    element.html(
+        `<div>
+        <h1>Quiz App</h1>
+        <p>This Quizz app tests your knowledge in various things.</p>
+
+        <button class="start-quiz">Start Quiz</button>
+    
+        </div>`);
+};
+
+const renderFinish = function(state, element){
+
+    element.html(`
+    <div>
+        <p>Your final score was ${state.currentScore} out of 5</p>
+        
+            <button class="finish-button">Start Over!</button>
+    </div>`);
 };
 
 //event listeners
@@ -113,22 +137,24 @@ $('.start-quiz').click(function(event){
     //alert("it works");
     addQuestion(appState);
     renderList(appState, $('.quiz-entry'));
+
     //$(this)[0].reset();
 });
 
 
-$('.two.answer').click(function(event){
-    event.preventDefault();
-    alert("this button works!");
-});
-    // checkAnswer(appState, $("input:checked").val());
+$('.quiz-entry').on('click', '.answer', function(event){
+    checkAnswer(appState, $("input:checked").val());
     // //"#myForm :input" 
     // console.log(checkAnswer);
     // console.log($("input:checked").val());
-//});
+});
 
 
 
 //$("input:checked").val() (use a filter)
 //start over
+
+$('.finish-button').click(function(event){
+
+});
 
