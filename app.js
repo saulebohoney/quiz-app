@@ -49,14 +49,6 @@ function addQuestion(state){
     state.answerStatus = null;
 }
 
-// function nextQuestion(state){
-//       if (state.currentId > questions.length) {
-
-    
-//     } else {
-//         addQuestion(state);
-//             }
-// }
 
 function checkAnswer(state, userChoice) {
     state.userAnswer = userChoice;
@@ -71,25 +63,8 @@ function startOver(state){
     state.currentQuestion= {};
     state.currentScore= 0;
     state.userAnswer=' ';
+    state.answerStatus=null;
 }
-
-// function finishPage(state){
-//     if((state.CurrentId) > questions.length){
-
-//        // renderFinish(state, $('.quiz-entry'));
-//     } else {addQuestions(state);
-//         // renderList(appState, $('.quiz-entry'));
-//     }
-// }
-
-
-//         const originalState=$(".quiz-entry").clone();
-//        $(".quiz-entry").replaceWith(originalState);
-//     }
-// }
-// var originalState = $("#some_div").clone();
-// $("#some_div").replaceWith(originalState);
-// Question Template 
 
 
 //RENDER FUNCTIONS////////////////////////////////////////////////////////////
