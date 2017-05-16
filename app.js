@@ -37,40 +37,43 @@ const appState ={
     currentQuestion: {},
     currentScore: 0,
     userAnswer: ' ',
+
 };
 
 //MOD FUNCTIONS////////////////////////////////////////////////////////////////////////
 function addQuestion(state){
     if (state.currentId) state.currentId++;
-    else state.currentId = 1
-    state.currentQuestion = questions[appState.currentId-1]
+    else state.currentId = 1;
+    state.currentQuestion = questions[appState.currentId-1];
 }
 
-function nextQuestion(state){
-      if (state.currentId > questions.length) {
-    renderFinish(state, $('.quiz-entry'));
-    } else {
-        addQuestion(state);
-            }
-}
+// function nextQuestion(state){
+//       if (state.currentId > questions.length) {
+
+    
+//     } else {
+//         addQuestion(state);
+//             }
+// }
 
 function checkAnswer(state, userChoice) {
     state.userAnswer = userChoice;
     if (userChoice == state.currentQuestion.correctAnswer) {
-      alert('correct!');
-      state.currentScore++;
-    } else {alert(`Sorry! The correct answer is ${state.currentQuestion.correctAnswer}`)}
+        alert('correct!');
+        state.currentScore++;
+    } else {alert(`Sorry! The correct answer is ${state.currentQuestion.correctAnswer}`);}
 }
 
 
 
-function finishPage(state){
-    if((state.CurrentId) > questions.length){
-        renderFinish(state, $('.quiz-entry'));
-} else {addQuestions(state);
-        // renderList(appState, $('.quiz-entry'));
-}
-}
+// function finishPage(state){
+//     if((state.CurrentId) > questions.length){
+
+//        // renderFinish(state, $('.quiz-entry'));
+//     } else {addQuestions(state);
+//         // renderList(appState, $('.quiz-entry'));
+//     }
+// }
 
 
 //         const originalState=$(".quiz-entry").clone();
@@ -83,9 +86,22 @@ function finishPage(state){
 
 
 //RENDER FUNCTIONS////////////////////////////////////////////////////////////
+//
+const render = function(state,element){
+    if (state.currentId == true && state.currentId > questions.length){
+        renderFinish(state,'.quiz-entry');
+    } else if (state.currentId == true && state.currentId < questions.length){
+        renderList(state,'.quiz-entry');
+    }else{renderHome(state,'.quiz-entry');
+
+    }
+     
+};
+
+       
 const renderList = function(state, element) {
 
-element.html(`<div class='two'>
+    element.html(`<div class='two'>
         <h1>Question ${state.currentId}</h1>
         <p>${state.currentQuestion.question}</p>
 
@@ -136,12 +152,14 @@ $('.start-quiz').click(function(event){
 
 
 $('.quiz-entry').on('click', '.answer', function(event){
-    checkAnswer(appState, $("input:checked").val());
+    checkAnswer(appState, $('input:checked').val());
+    addQuestion(appState);
+    render(appState,$('.quiz-entry'));
      //finishPage(appState);
-     nextQuestion(appState);
-     renderList(appState, $('.quiz-entry'));
-     console.log(appState.currentId);
-     //renderFinish(appState,$('.quiz-entry'));
+    // nextQuestion(appState);
+    // renderList(appState, $('.quiz-entry'));
+    // console.log(appState.currentId);
+    //  //renderFinish(appState,$('.quiz-entry'));
      //finishPage(appState,$('.quiz-entry'));
     // //"#myForm :input" 
     // console.log(checkAnswer);
