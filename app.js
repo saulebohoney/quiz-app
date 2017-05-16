@@ -8,7 +8,7 @@ const questions=[
 
     {
         question:'this is questions two',
-        answers:['a','b','c'],
+        answers:['one','five','42'],
         correctAnswer: ['b']
     },
     { 
@@ -88,15 +88,16 @@ function checkAnswer(state, userChoice) {
 //RENDER FUNCTIONS////////////////////////////////////////////////////////////
 //
 const render = function(state,element){
-    if (state.currentId == true && state.currentId > questions.length){
-        renderFinish(state,'.quiz-entry');
-    } else if (state.currentId == true && state.currentId < questions.length){
-        renderList(state,'.quiz-entry');
-    }else{renderHome(state,'.quiz-entry');
+    if (state.currentId == null){
+        renderHome(state, element);
+    } else if (state.currentId <= questions.length){
+        renderList(state, element);
+    }else{renderFinish(state, element);
 
     }
      
 };
+
 
        
 const renderList = function(state, element) {
@@ -146,7 +147,7 @@ const renderFinish = function(state, element){
 
 $('.start-quiz').click(function(event){
     addQuestion(appState);
-    renderList(appState, $('.quiz-entry'));
+    render(appState, $('.quiz-entry'));
 
 });
 
@@ -154,11 +155,12 @@ $('.start-quiz').click(function(event){
 $('.quiz-entry').on('click', '.answer', function(event){
     checkAnswer(appState, $('input:checked').val());
     addQuestion(appState);
+    //console.log(appState.currentId);
     render(appState,$('.quiz-entry'));
      //finishPage(appState);
     // nextQuestion(appState);
     // renderList(appState, $('.quiz-entry'));
-    // console.log(appState.currentId);
+    
     //  //renderFinish(appState,$('.quiz-entry'));
      //finishPage(appState,$('.quiz-entry'));
     // //"#myForm :input" 
