@@ -77,6 +77,16 @@ function checkAnswer(state, userChoice) {
 console.log(appState.currentScore);
 
 console.log(questions.length);
+
+function checkButton(){
+    return $('input[type=radio]:checked').val();
+   }
+
+
+checkButton(appState);
+console.log(checkButton);
+
+
 //Question Template 
 
 const renderList = function(state, element) {
@@ -89,7 +99,7 @@ element.html(`<div>
             <input type="radio" name="answer" value="a">${state.currentQuestion.answers[0]}<br>
             <input type="radio" name="answer" value="b">${state.currentQuestion.answers[1]}<br>
             <input type="radio" name="answer" value="c">${state.currentQuestion.answers[2]}
-            <button>Submit</button>
+            <button class='answer'>Submit</button>
         </form>
     </div>
 
@@ -102,12 +112,21 @@ element.html(`<div>
 //event listeners
 
 //start button
+
 $('.start-quiz').click(function(event){
     //alert("it works");
     addQuestion(appState);
     renderList(appState, $('.quiz-entry'));
+    //$(this)[0].reset();
 });
-//submit
+
+
+// $('.answer').click(fucntion(event){
+
+// })
+
+
+
 //$("input:checked").val() (use a filter)
 //start over
 //
