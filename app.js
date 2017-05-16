@@ -74,17 +74,14 @@ function checkAnswer(state, userChoice) {
     console.log(appState.currentScore);
 }
 
-// console.log(appState.currentScore);
-// checkAnswer(appState, "b")
-
-// function checkButton(){
-//     let userChoice = $('input:checked').val();
-//     return testButton;
-//    }
-// checkButton();
-
-
-
+function startOver()
+    if(currentId > questions.length){
+        const originalState=
+       $(".quiz-entry").replaceWith(originalState);
+    }
+}
+//var originalState = $("#some_div").clone();
+//$("#some_div").replaceWith(originalState);
 //Question Template 
 
 const renderList = function(state, element) {
@@ -134,4 +131,4 @@ $('.two.answer').click(function(event){
 
 //$("input:checked").val() (use a filter)
 //start over
-//
+
