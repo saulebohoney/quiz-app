@@ -50,9 +50,12 @@ const appState ={
 
 //mod functions
 function addQuestion(state){
-    if (state.currentId) state.currentId++;
-    else state.currentId = 0;
-    state.currentQuestion = questions[appState.currentId]
+    if (state.currentId===true &&& state.currentID > questions.length){
+
+        // state.currentId++;
+
+    else {state.currentId = 
+    state.currentQuestion = questions[appState.currentId-1]
     //questions[2]
     //questions[x-1]
     //questions[state.currentId-1]
@@ -71,26 +74,29 @@ function checkAnswer(state, userChoice) {
 
 
 
-// function finishPage(){
-//     if((currentId+1) > questions.length){
-//         renderFinish(appState, $('.quiz-entry'));
-// } else {
-//         renderList(appState, $('.quiz-entry'));
-// }
+function finishPage(state){
+    if((state.CurrentId) > questions.length){
+        renderFinish(state, $('.quiz-entry'));
+} else {addQuestions(state);
+        // renderList(appState, $('.quiz-entry'));
+}
+}
 
 
 //         const originalState=$(".quiz-entry").clone();
 //        $(".quiz-entry").replaceWith(originalState);
 //     }
 // }
-//var originalState = $("#some_div").clone();
-//$("#some_div").replaceWith(originalState);
-//Question Template 
+// var originalState = $("#some_div").clone();
+// $("#some_div").replaceWith(originalState);
+// Question Template 
+
+
 
 const renderList = function(state, element) {
 
 element.html(`<div class='two'>
-        <h1>Question ${state.currentId+1}</h1>
+        <h1>Question ${state.currentId}</h1>
         <p>${state.currentQuestion.question}</p>
 
          
@@ -101,7 +107,7 @@ element.html(`<div class='two'>
 
     </div>
 
-    <div>Current Question ${state.currentId+1} out of ${questions.length}</div>
+    <div>Current Question ${state.currentId} out of ${questions.length}</div>
     <div>Current Score: ${state.currentScore} out of ${questions.length}</div>
 
     `);
@@ -129,6 +135,7 @@ const renderFinish = function(state, element){
     </div>`);
 };
 
+
 //event listeners
 
 //start button
@@ -144,6 +151,11 @@ $('.start-quiz').click(function(event){
 
 $('.quiz-entry').on('click', '.answer', function(event){
     checkAnswer(appState, $("input:checked").val());
+     finishPage(appState);
+     //addQuestion(appState);
+     renderList(appState, $('.quiz-entry'));
+     //renderFinish(appState,$('.quiz-entry'));
+     //finishPage(appState,$('.quiz-entry'));
     // //"#myForm :input" 
     // console.log(checkAnswer);
     // console.log($("input:checked").val());
