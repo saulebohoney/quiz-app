@@ -44,14 +44,14 @@ function addQuestion(state){
     if (state.currentId) state.currentId++;
     else state.currentId = 1
     state.currentQuestion = questions[appState.currentId-1]
+}
 
-// if (state.currentId === true && state.currentId > questions.length); {
-//     //run the render function for finish
-
-// } else (state.currentId === true && state.currentId < questions.length); {
-// state.currentId++;
-// } else if {state.currentId = 1}
-
+function nextQuestion(state){
+      if (state.currentId > questions.length) {
+    renderFinish(state, $('.quiz-entry'));
+    } else {
+        addQuestion(state);
+            }
 }
 
 function checkAnswer(state, userChoice) {
@@ -119,7 +119,7 @@ const renderFinish = function(state, element){
 
     element.html(`
     <div>
-        <p>Your final score was ${state.currentScore} out of 5</p>
+        <p>Your final score was ${state.currentScore} out of ${questions.length}</p>
         
             <button class="finish-button">Start Over!</button>
     </div>`);
@@ -138,8 +138,9 @@ $('.start-quiz').click(function(event){
 $('.quiz-entry').on('click', '.answer', function(event){
     checkAnswer(appState, $("input:checked").val());
      //finishPage(appState);
-     addQuestion(appState);
+     nextQuestion(appState);
      renderList(appState, $('.quiz-entry'));
+     console.log(appState.currentId);
      //renderFinish(appState,$('.quiz-entry'));
      //finishPage(appState,$('.quiz-entry'));
     // //"#myForm :input" 
@@ -152,7 +153,7 @@ $('.quiz-entry').on('click', '.answer', function(event){
 //$("input:checked").val() (use a filter)
 //start over
 
-$('.finish-button').click(function(event){
+// $('.finish-button').click(function(event){
 
-});
+// });
 
