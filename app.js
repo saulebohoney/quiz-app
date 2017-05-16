@@ -37,8 +37,7 @@ const appState ={
     currentQuestion: {},
     currentScore: 0,
     userAnswer: ' ',
-    correctMessage:'Correct!',
-    incorrectMessage:'Wrong!'
+    answerStatus: null,
 
 };
 
@@ -47,6 +46,7 @@ function addQuestion(state){
     if (state.currentId) state.currentId++;
     else state.currentId = 1;
     state.currentQuestion = questions[appState.currentId-1];
+    state.answerStatus = null;
 }
 
 // function nextQuestion(state){
@@ -61,9 +61,9 @@ function addQuestion(state){
 function checkAnswer(state, userChoice) {
     state.userAnswer = userChoice;
     if (userChoice == state.currentQuestion.correctAnswer) {
-        alert('correct!');
+        state.answerStatus = true;
         state.currentScore++;
-    } else {alert(`Sorry! The correct answer is ${state.currentQuestion.correctAnswer}`);}
+    } else {state.answerStatus = false;}
 }
 
 function startOver(state){
@@ -97,8 +97,12 @@ function startOver(state){
 const render = function(state,element){
     if (state.currentId == null){
         renderHome(state, element);
-    } else if (state.currentId <= questions.length){
+    } else if (state.currentId <= questions.length && state.answerStatus == null){
         renderList(state, element);
+    } else if (state.currentId <= questions.length && state.answerStatus == true){
+        renderCorrect(state, element);
+    } else if (state.currentId <= questions.length && state.answerStatus == false){
+        renderWrong(state, element);
     }else{renderFinish(state, element);
 
     }
@@ -149,21 +153,43 @@ const renderFinish = function(state, element){
     </div>`);
 };
 
+const renderCorrect = function(state, element) {
 
+    element.html(
+        `<div>
+    <h4>Congrats!</h4>
+    <p>You answered correctly!</p>
+    </div>
+    <button class="next-question">Next</button>`);
+}
+
+const renderWrong = function(state, element) {
+
+    element.html(`
+        <div>
+        <h4>Incorrect</h4>
+        <p>We're sorry the correct answer was ${state.currentQuestion.correctAnswer}.</p>
+        </div>
+        <button class="next-question">Next</button>`);
+}
 //EVENT LISTENERS///////////////////////////////////////////////////////////////
 
 $('.quiz-entry').on('click','.start-quiz',function(event){
     addQuestion(appState);
     render(appState, $('.quiz-entry'));
-
 });
 
 
 $('.quiz-entry').on('click', '.answer', function(event){
     checkAnswer(appState, $('input:checked').val());
-    addQuestion(appState);
     render(appState,$('.quiz-entry'));
 });
+
+$('.quiz-entry').on('click', '.next-question', function (event){
+    addQuestion(appState);
+    render(appState, $('.quiz-entry'));
+});
+
 $('.quiz-entry').on('click','.finish-button',function(event){
     startOver(appState);
     render(appState,$('.quiz-entry'));
