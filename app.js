@@ -33,7 +33,7 @@ const questions=[
 
 //appState
 const appState ={
-    currentId: 0,
+    currentId: null,
     currentQuestion: {},
     currentScore: 0,
     userAnswer: ' ',
@@ -49,18 +49,18 @@ const appState ={
 };
 
 //mod functions
-function addQuestion(state, index){
-    appState.currentId++;
-    appState.currentQuestion = questions[appState.currentId-1];
+function addQuestion(state){
+    if (state.currentId) state.currentId++;
+    else state.currentId = 0;
+    state.currentQuestion = questions[appState.currentId]
     //questions[2]
     //questions[x-1]
     //questions[state.currentId-1]
 
     //console.log(appState.currentId);
-   // console.log(appState.currentQuestion);
 }
-addQuestion();
-console.log(appState.currentId);
+addQuestion(appState);
+console.log(addQuestion);
 
 //mod to check answers
 function checkAnswer(state, userChoice) {
@@ -73,7 +73,6 @@ function checkAnswer(state, userChoice) {
     console.log(appState.currentQuestion.correctAnswer);
     console.log(appState.currentScore);
 }
-checkAnswer(appState, 'b');
 
 console.log(appState.currentScore);
 
@@ -83,29 +82,32 @@ console.log(questions.length);
 const renderList = function(state, element) {
 
 element.html(`<div>
-        <h1>Question ${state.currentId}</h1>
+        <h1>Question ${state.currentId +1}</h1>
         <p>${state.currentQuestion.question}</p>
 
         <form action="">    
             <input type="radio" name="answer" value="a">${state.currentQuestion.answers[0]}<br>
             <input type="radio" name="answer" value="b">${state.currentQuestion.answers[1]}<br>
             <input type="radio" name="answer" value="c">${state.currentQuestion.answers[2]}
+            <button>Submit</button>
         </form>
     </div>
 
-    <div>
-
-        <form>
-            <button>Submit</button>
-        </form>
-
-    <div>Current Question ${state.currentId} out of ${questions.length}</div>
+    <div>Current Question ${state.currentId+1} out of ${questions.length}</div>
     <div>Current Score: ${state.currentScore} out of ${questions.length}</div>
 
-    </div>`);
+    `);
 };
 
 //event listeners
+
 //start button
+$('.start-quiz').click(function(event){
+    //alert("it works");
+    addQuestion(appState);
+    renderList(appState, $('.quiz-entry'));
+});
 //submit
+//$("input:checked").val()
 //start over
+//
