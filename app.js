@@ -74,8 +74,8 @@ function checkAnswer(state, userChoice) {
     console.log(appState.currentScore);
 }
 
-console.log(appState.currentScore);
-checkAnswer(appState, "b")
+// console.log(appState.currentScore);
+// checkAnswer(appState, "b")
 
 // function checkButton(){
 //     let userChoice = $('input:checked').val();
@@ -89,7 +89,7 @@ checkAnswer(appState, "b")
 
 const renderList = function(state, element) {
 
-element.html(`<div>
+element.html(`<div class='two'>
         <h1>Question ${state.currentId+1}</h1>
         <p>${state.currentQuestion.question}</p>
 
@@ -98,8 +98,7 @@ element.html(`<div>
             <input type="radio" name="answer" value="b">${state.currentQuestion.answers[1]}<br>
             <input type="radio" name="answer" value="c">${state.currentQuestion.answers[2]}
         </form>
-
-        <button class='answer'>Submit</button>
+             <button class='answer'>Submit</button>
 
     </div>
 
@@ -121,13 +120,15 @@ $('.start-quiz').click(function(event){
 });
 
 
-$('.answer').on("click", function(event){
+$('.two.answer').click(function(event){
     event.preventDefault();
     alert("this button works!");
-    checkAnswer(appState, $("input:checked").val());
-    console.log(checkAnswer);
-    console.log($("input:checked").val());
 });
+    // checkAnswer(appState, $("input:checked").val());
+    // //"#myForm :input" 
+    // console.log(checkAnswer);
+    // console.log($("input:checked").val());
+//});
 
 
 
