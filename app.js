@@ -1,32 +1,32 @@
 //QUESTIONS////////////////////////////////////////////////////////////
 const questions=[
     {
-        question:'this is questions one',
-        answers:['a','b','c'],
-        correctAnswer: ['b']
+        question:'What is the capital of Virginia?',
+        answers:['Richmond','Roanoke','Ashburn'],
+        correctAnswer: ['Richmond']
     },
 
     {
-        question:'this is questions two',
-        answers:['one','five','42'],
-        correctAnswer: ['b']
+        question:'What is the capital of Utah?',
+        answers:['Park City','Provo','Salt Lake City'],
+        correctAnswer: ['Salt Lake City']
     },
     { 
-        question:'this is questions three',
-        answers:['a','b','c'],
-        correctAnswer: ['b']
+        question:'What is the captial of Massachusetts?',
+        answers:['Norwell','Boston','Worcester'],
+        correctAnswer: ['Boston']
 
     },
     { 
-        question:'this is questions four',
-        answers:['a','b','c'],
-        correctAnswer: ['b']
+        question:'What is the capital of Maine?',
+        answers:['Portland','Bangor','Augusta'],
+        correctAnswer: ['Augusta']
 
     },
     { 
-        question:'this is questions five',
-        answers:['a','b','c'],
-        correctAnswer: ['b']
+        question:'What is the capital of Florida?',
+        answers:['Orlando','Tallahassee','Miami'],
+        correctAnswer: ['Tallahassee']
     }
 ];
 
@@ -124,8 +124,8 @@ const renderHome = function(state, element) {
 
     element.html(
         `<div>
-        <h1>Quiz App</h1>
-        <p>This Quizz app tests your knowledge in various things.</p>
+        <h1>State Capital Quiz</h1>
+        <p>How well do you know your capitals?</p>
 
         <button class="start-quiz">Start Quiz</button>
     
