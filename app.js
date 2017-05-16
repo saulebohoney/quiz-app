@@ -37,6 +37,8 @@ const appState ={
     currentQuestion: {},
     currentScore: 0,
     userAnswer: ' ',
+    correctMessage:'Correct!',
+    incorrectMessage:'Wrong!'
 
 };
 
@@ -64,7 +66,12 @@ function checkAnswer(state, userChoice) {
     } else {alert(`Sorry! The correct answer is ${state.currentQuestion.correctAnswer}`);}
 }
 
-
+function startOver(state){
+    state.currentId =null;
+    state.currentQuestion= {};
+    state.currentScore= 0;
+    state.userAnswer=' ';
+}
 
 // function finishPage(state){
 //     if((state.CurrentId) > questions.length){
@@ -145,7 +152,7 @@ const renderFinish = function(state, element){
 
 //EVENT LISTENERS///////////////////////////////////////////////////////////////
 
-$('.start-quiz').click(function(event){
+$('.quiz-entry').on('click','.start-quiz',function(event){
     addQuestion(appState);
     render(appState, $('.quiz-entry'));
 
@@ -155,25 +162,12 @@ $('.start-quiz').click(function(event){
 $('.quiz-entry').on('click', '.answer', function(event){
     checkAnswer(appState, $('input:checked').val());
     addQuestion(appState);
-    //console.log(appState.currentId);
     render(appState,$('.quiz-entry'));
-     //finishPage(appState);
-    // nextQuestion(appState);
-    // renderList(appState, $('.quiz-entry'));
-    
-    //  //renderFinish(appState,$('.quiz-entry'));
-     //finishPage(appState,$('.quiz-entry'));
-    // //"#myForm :input" 
-    // console.log(checkAnswer);
-    // console.log($("input:checked").val());
+});
+$('.quiz-entry').on('click','.finish-button',function(event){
+    startOver(appState);
+    render(appState,$('.quiz-entry'));
 });
 
 
-
-//$("input:checked").val() (use a filter)
-//start over
-
-// $('.finish-button').click(function(event){
-
-// });
 
