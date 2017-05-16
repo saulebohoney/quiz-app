@@ -82,7 +82,7 @@ console.log(questions.length);
 const renderList = function(state, element) {
 
 element.html(`<div>
-        <h1>Question ${state.currentId +1}</h1>
+        <h1>Question ${state.currentId+1}</h1>
         <p>${state.currentQuestion.question}</p>
 
         <form action="">    
@@ -108,6 +108,6 @@ $('.start-quiz').click(function(event){
     renderList(appState, $('.quiz-entry'));
 });
 //submit
-//$("input:checked").val()
+//$("input:checked").val() (use a filter)
 //start over
 //
