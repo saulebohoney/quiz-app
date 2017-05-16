@@ -1,4 +1,4 @@
-//question:
+//QUESTIONS////////////////////////////////////////////////////////////
 const questions=[
     {
         question:'this is questions one',
@@ -31,39 +31,29 @@ const questions=[
 ];
 
 
-//appState
+//appState/////////////////////////////////////////////////////////////////
 const appState ={
     currentId: null,
     currentQuestion: {},
     currentScore: 0,
     userAnswer: ' ',
-    
-
-    /*
-    question:questions.question,
-    answers:questions.answers,
-    correctAnswer:questions.correctAnswer,
-    userAnswer:questions.answers,
-    score:0
-    */
 };
 
-//mod functions
+//MOD FUNCTIONS////////////////////////////////////////////////////////////////////////
 function addQuestion(state){
-    if (state.currentId===true &&& state.currentID > questions.length){
-
-        // state.currentId++;
-
-    else {state.currentId = 
+    if (state.currentId) state.currentId++;
+    else state.currentId = 1
     state.currentQuestion = questions[appState.currentId-1]
-    //questions[2]
-    //questions[x-1]
-    //questions[state.currentId-1]
 
-    //console.log(appState.currentId);
+// if (state.currentId === true && state.currentId > questions.length); {
+//     //run the render function for finish
+
+// } else (state.currentId === true && state.currentId < questions.length); {
+// state.currentId++;
+// } else if {state.currentId = 1}
+
 }
 
-//mod to check answers
 function checkAnswer(state, userChoice) {
     state.userAnswer = userChoice;
     if (userChoice == state.currentQuestion.correctAnswer) {
@@ -92,7 +82,7 @@ function finishPage(state){
 // Question Template 
 
 
-
+//RENDER FUNCTIONS////////////////////////////////////////////////////////////
 const renderList = function(state, element) {
 
 element.html(`<div class='two'>
@@ -136,23 +126,19 @@ const renderFinish = function(state, element){
 };
 
 
-//event listeners
-
-//start button
+//EVENT LISTENERS///////////////////////////////////////////////////////////////
 
 $('.start-quiz').click(function(event){
-    //alert("it works");
     addQuestion(appState);
     renderList(appState, $('.quiz-entry'));
 
-    //$(this)[0].reset();
 });
 
 
 $('.quiz-entry').on('click', '.answer', function(event){
     checkAnswer(appState, $("input:checked").val());
-     finishPage(appState);
-     //addQuestion(appState);
+     //finishPage(appState);
+     addQuestion(appState);
      renderList(appState, $('.quiz-entry'));
      //renderFinish(appState,$('.quiz-entry'));
      //finishPage(appState,$('.quiz-entry'));
